@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: CC-BY-4.0
+name: Research evidence
+description: Add or challenge an interface, compatibility, or protocol claim
+title: "[research] "
+labels: ["research"]
+body:
+  - type: dropdown
+    id: confidence
+    attributes:
+      label: Evidence class
+      options:
+        - confirmed-official
+        - confirmed-measured
+        - independent-report
+        - inferred
+        - unknown
+    validations:
+      required: true
+  - type: input
+    id: target
+    attributes:
+      label: Exact vehicle or component revision
+    validations:
+      required: true
+  - type: textarea
+    id: claim
+    attributes:
+      label: Claim and source
+      description: Include public URLs, access date, setup, and uncertainty.
+    validations:
+      required: true
+  - type: textarea
+    id: privacy
+    attributes:
+      label: Privacy and clean-room check
+      description: Confirm no VIN, GPS, credentials, proprietary firmware, or restricted material.
+    validations:
+      required: true

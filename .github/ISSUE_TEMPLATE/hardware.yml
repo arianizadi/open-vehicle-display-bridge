@@ -1,0 +1,31 @@
+# SPDX-License-Identifier: CC-BY-4.0
+name: Hardware proposal
+description: Propose an original board, harness, fixture, or enclosure change
+title: "[hardware] "
+labels: ["hardware"]
+body:
+  - type: input
+    id: manifest
+    attributes:
+      label: Target manifest
+      placeholder: vehicle-independent or exact manifest id
+    validations:
+      required: true
+  - type: textarea
+    id: design
+    attributes:
+      label: Design and evidence
+    validations:
+      required: true
+  - type: textarea
+    id: failure
+    attributes:
+      label: Failure modes and native fallback
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: Bench validation and rollback
+    validations:
+      required: true

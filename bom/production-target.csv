@@ -1,0 +1,7 @@
+category,target_low_usd,target_high_usd,assumption
+electronics,140,300,"validated custom PCB at modest volume; excludes NRE and certification"
+harnesses,45,140,"one exact vehicle revision with controlled connector supply"
+compute,55,160,"commodity module without proprietary certifications"
+enclosure_and_thermal,25,80,"validated but not automotive-qualified estimate"
+assembly_and_test,30,100,"fixture-based end-of-line continuity and fail-native tests"
+total_cogs,295,780,"planning envelope only; excludes labor development support warranty compliance logistics and margin"

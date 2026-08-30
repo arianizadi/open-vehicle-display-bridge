@@ -1,0 +1,240 @@
+{
+  "schema_version": "0.2.0",
+  "manifest_revision": 1,
+  "manifest_id": "tesla-model3-highland-2025-owner-candidate",
+  "status": "candidate",
+  "exact_match_required": true,
+  "independent_vehicle_instances": 0,
+  "validated_vehicle_instance_ids": [],
+  "vehicle": {
+    "make": "Tesla",
+    "model": "Model 3",
+    "generation": "Highland",
+    "model_year": 2025,
+    "market": null,
+    "plant": null,
+    "steering_side": "unknown",
+    "build_date_range": {
+      "start": null,
+      "end": null
+    },
+    "mcu_family": null,
+    "autopilot_hardware": null,
+    "display_part_numbers": [],
+    "tesla_software_versions": []
+  },
+  "tesla_reference": {
+    "program_id": null,
+    "candidate_program_ids": [233, 333],
+    "index_url": "https://service.tesla.com/docs/Model3/ElectricalReference/",
+    "connector_reference_url": null
+  },
+  "interfaces": [
+    {
+      "name": "display-main-link-lhd-candidate",
+      "endpoint": "display",
+      "connector_ref": "X861",
+      "applies_to_steering_side": "LHD",
+      "role": "display-side power and high-speed Display Data",
+      "tesla_part_number": "1086455-03-B",
+      "manufacturer_part_number": "Rosenberger 99K11D-1D5A5-D",
+      "mating_part": null,
+      "pins": [
+        {
+          "cavity": "1",
+          "signal": "12V (Tesla net name)",
+          "direction": "power",
+          "confidence": "confirmed-official"
+        },
+        {
+          "cavity": "2",
+          "signal": "GND",
+          "direction": "ground",
+          "confidence": "confirmed-official"
+        },
+        {
+          "cavity": "H",
+          "signal": "Display Data aggregate high-speed block; internal contacts not individually published",
+          "direction": "unknown",
+          "confidence": "confirmed-official"
+        }
+      ],
+      "pinout_status": "candidate",
+      "confidence": "confirmed-official",
+      "notes": "LHD public reference candidate only. Main transport, verified counter-mating interposer/device part, physical target, and owner applicability are unresolved."
+    },
+    {
+      "name": "mcu-main-link-lhd-candidate",
+      "endpoint": "mcu",
+      "connector_ref": "X860",
+      "applies_to_steering_side": "LHD",
+      "role": "MCU-side power and high-speed Display Data",
+      "tesla_part_number": "1101044-01-B",
+      "manufacturer_part_number": "Rosenberger 99K20K-1D5A5-B",
+      "mating_part": null,
+      "pins": [
+        {
+          "cavity": "1",
+          "signal": "12V (Tesla net name)",
+          "direction": "power",
+          "confidence": "confirmed-official"
+        },
+        {
+          "cavity": "2",
+          "signal": "GND",
+          "direction": "ground",
+          "confidence": "confirmed-official"
+        },
+        {
+          "cavity": "H",
+          "signal": "Display Data aggregate high-speed block; internal contacts not individually published",
+          "direction": "unknown",
+          "confidence": "confirmed-official"
+        }
+      ],
+      "pinout_status": "candidate",
+      "confidence": "confirmed-official",
+      "notes": "LHD public reference candidate only. Exact physical target and counter-mating interposer/device part require verification."
+    },
+    {
+      "name": "display-sideband-lhd-candidate",
+      "endpoint": "display",
+      "connector_ref": "X189",
+      "applies_to_steering_side": "LHD",
+      "role": "display-side DP AUX, differential I2C, HPD, and touch interrupt",
+      "tesla_part_number": "1660464-01-A",
+      "manufacturer_part_number": "Hirose GT25-8DS-HU(21)",
+      "mating_part": null,
+      "pins": [
+        {"cavity": "1", "signal": "MUX-DP2-AUX_N", "direction": "unknown", "confidence": "confirmed-official"},
+        {"cavity": "2", "signal": "MUX-DP2-AUX_P", "direction": "unknown", "confidence": "confirmed-official"},
+        {"cavity": "3", "signal": "CENTER-I2C-SDA_N", "direction": "unknown", "confidence": "confirmed-official"},
+        {"cavity": "4", "signal": "CENTER-I2C-SDA_P", "direction": "unknown", "confidence": "confirmed-official"},
+        {"cavity": "5", "signal": "CENTER-TOUCH-INTb", "direction": "unknown", "confidence": "confirmed-official"},
+        {"cavity": "6", "signal": "MUX-DP2-HPD", "direction": "unknown", "confidence": "confirmed-official"},
+        {"cavity": "7", "signal": "CENTER-I2C-SCL_N", "direction": "unknown", "confidence": "confirmed-official"},
+        {"cavity": "8", "signal": "CENTER-I2C-SCL_P", "direction": "unknown", "confidence": "confirmed-official"}
+      ],
+      "pinout_status": "candidate",
+      "confidence": "confirmed-official",
+      "notes": "LHD public reference candidate only. Verified counter-mating interposer/device part, owner program, orientation, keying, and bench behavior are unresolved."
+    },
+    {
+      "name": "mcu-sideband-lhd-candidate",
+      "endpoint": "mcu",
+      "connector_ref": "X176",
+      "applies_to_steering_side": "LHD",
+      "role": "MCU-side DP AUX, differential I2C, HPD, and touch interrupt",
+      "tesla_part_number": "1660464-00-A",
+      "manufacturer_part_number": "Hirose GT25-8DS-HU",
+      "mating_part": null,
+      "pins": [
+        {"cavity": "1", "signal": "CENTER-I2C-SDA_P", "direction": "unknown", "confidence": "confirmed-official"},
+        {"cavity": "2", "signal": "CENTER-I2C-SDA_N", "direction": "unknown", "confidence": "confirmed-official"},
+        {"cavity": "3", "signal": "MUX-DP2-AUX_P", "direction": "unknown", "confidence": "confirmed-official"},
+        {"cavity": "4", "signal": "MUX-DP2-AUX_N", "direction": "unknown", "confidence": "confirmed-official"},
+        {"cavity": "5", "signal": "CENTER-I2C-SCL_P", "direction": "unknown", "confidence": "confirmed-official"},
+        {"cavity": "6", "signal": "CENTER-I2C-SCL_N", "direction": "unknown", "confidence": "confirmed-official"},
+        {"cavity": "7", "signal": "MUX-DP2-HPD", "direction": "unknown", "confidence": "confirmed-official"},
+        {"cavity": "8", "signal": "CENTER-TOUCH-INTb", "direction": "unknown", "confidence": "confirmed-official"}
+      ],
+      "pinout_status": "candidate",
+      "confidence": "confirmed-official",
+      "notes": "LHD public reference candidate only. Verified counter-mating interposer/device part and physical orientation remain unresolved."
+    }
+  ],
+  "harnesses": [],
+  "protocol_profile": {
+    "status": "unknown",
+    "main_transport": null,
+    "transport_confidence": "unknown",
+    "native_width_px": null,
+    "native_height_px": null,
+    "refresh_hz": null,
+    "lane_count": null,
+    "link_rate": null,
+    "edid_sha256": null,
+    "displayid_sha256": null,
+    "dpcd_sha256": null,
+    "aux_hpd_profile_sha256": null,
+    "touch_transport": null,
+    "touch_profile_sha256": null
+  },
+  "power_profile": {
+    "status": "candidate",
+    "platform_class": "16 V-class low-voltage system",
+    "display_rail_net_name": "12V",
+    "accessory_nominal_max_v": 16,
+    "measured_awake_min_v": null,
+    "measured_awake_max_v": null,
+    "startup_peak_a": null,
+    "sleep_current_ma": null,
+    "transient_profile_sha256": null
+  },
+  "can_profile": {
+    "status": "unknown",
+    "access_connector": null,
+    "bitrate_bps": null,
+    "physical_mode": "receive-only",
+    "termination_ohms_added": 0,
+    "signal_profile_sha256": null,
+    "source_software_version": null,
+    "notes": "Resolve market/build connector availability before selecting a tap. No transmit path is permitted."
+  },
+  "safe_state": {
+    "deenergized_source": "factory-native",
+    "fault_source": "factory-native",
+    "required_native_conditions": [
+      "boot",
+      "shutdown",
+      "reverse",
+      "vehicle-moving-initial-release",
+      "stale-or-unknown-state",
+      "watchdog-fault",
+      "undervoltage",
+      "overtemperature",
+      "update-or-rollback",
+      "physical-bypass"
+    ],
+    "park_state_max_age_ms": null,
+    "native_recovery_timeout_ms": null
+  },
+  "feature_gates": {
+    "bench_identification": true,
+    "external_video": false,
+    "touch_to_local": false,
+    "can_receive": false,
+    "vehicle_installation": false,
+    "moving_mode": false,
+    "can_transmit": false
+  },
+  "capture_artifacts": [],
+  "validation": [],
+  "evidence": [
+    {
+      "id": "TESLA-ER-INDEX",
+      "claim": "Tesla publishes date- and plant-bounded Model 3 electrical-reference programs.",
+      "source_url": "https://service.tesla.com/docs/Model3/ElectricalReference/",
+      "accessed": "2026-08-30",
+      "confidence": "confirmed-official",
+      "artifact_sha256": null
+    },
+    {
+      "id": "TESLA-SOP8-SPECIAL-CABLES-LHD",
+      "claim": "Program 233 LHD publishes separate X860-X861 Display Data/power and X176-X189 AUX/I2C/touch paths.",
+      "source_url": "https://service.tesla.com/docs/Model3/ElectricalReference/prog-233/interactive/pdf/rf_special_cables_lhd_print.pdf",
+      "accessed": "2026-08-30",
+      "confidence": "confirmed-official",
+      "artifact_sha256": null
+    },
+    {
+      "id": "TESLA-SOP9-SPECIAL-CABLES-LHD",
+      "claim": "Program 333 LHD publishes the same named dual-path topology with a distinct production range.",
+      "source_url": "https://service.tesla.com/docs/Model3/ElectricalReference/prog-333/interactive/pdf/rf_special_cables_lhd_print.pdf",
+      "accessed": "2026-08-30",
+      "confidence": "confirmed-official",
+      "artifact_sha256": null
+    }
+  ],
+  "reviewers": []
+}

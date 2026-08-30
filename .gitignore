@@ -1,0 +1,39 @@
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Language/tool output
+__pycache__/
+*.py[cod]
+.pytest_cache/
+node_modules/
+dist/
+build/
+out/
+.cache/
+
+# Hardware manufacturing and local EDA state
+*-backups/
+*.lck
+*.bak
+
+# Captures are provenance-controlled; raw captures stay outside Git
+captures/raw/
+*.pcap
+*.pcapng
+*.blf
+*.mf4
+*.asc
+*.log
+*.bin
+*.img
+*.dump
+
+# Secrets and private vehicle metadata
+.env
+.env.*
+!.env.example
+private/
+vehicle-private.*

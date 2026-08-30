@@ -1,0 +1,10 @@
+category,item,quantity,low_usd,high_usd,status,basis
+target,matching salvaged 2025 Model 3 display,1,250,700,estimate,"market varies; verify exact part before purchase"
+target,keyed mating pigtail or donor harness,1,75,250,estimate,"connector availability is a major uncertainty"
+video,source-to-verified-Highland-link evaluation or development hardware,1,250,1200,unknown,"do not purchase until main transport lane rate and training are bench-identified"
+compute,HDMI test-pattern source,1,50,150,estimate,"existing laptop or SBC may reduce cost"
+power,current-limited bench supply,1,100,350,estimate,"reuse lab equipment if rated for measured startup load"
+power,fuse disconnect protection and harness materials,1,75,250,estimate,"must be reviewed before energizing"
+instrumentation,logic analyzer or protocol adapter,1,20,250,optional,"depends on verified sideband interface"
+mechanical,fixture strain relief and enclosure materials,1,30,150,estimate,"nonconductive bench mounting"
+total,bench subtotal excluding scope and thermal camera,1,850,3300,planning-range,"not a quote or purchasing recommendation"

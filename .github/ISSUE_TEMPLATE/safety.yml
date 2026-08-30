@@ -1,0 +1,27 @@
+# SPDX-License-Identifier: CC-BY-4.0
+name: Safety concern
+description: Report a hazard, unsafe assumption, or failed safety test
+title: "[safety] "
+labels: ["safety", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: If exploitation would be dangerous, use private vulnerability reporting instead.
+  - type: textarea
+    id: hazard
+    attributes:
+      label: Hazard and affected revision
+    validations:
+      required: true
+  - type: textarea
+    id: stop
+    attributes:
+      label: Immediate containment or stop-work action
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Reproducible evidence
+    validations:
+      required: true

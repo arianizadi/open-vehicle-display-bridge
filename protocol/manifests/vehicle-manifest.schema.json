@@ -1,0 +1,360 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/arianizadi/open-vehicle-display-bridge/protocol/manifests/vehicle-manifest.schema.json",
+  "title": "Open Vehicle Display Bridge vehicle revision manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "manifest_revision",
+    "manifest_id",
+    "status",
+    "exact_match_required",
+    "independent_vehicle_instances",
+    "validated_vehicle_instance_ids",
+    "vehicle",
+    "tesla_reference",
+    "interfaces",
+    "harnesses",
+    "protocol_profile",
+    "power_profile",
+    "can_profile",
+    "safe_state",
+    "feature_gates",
+    "capture_artifacts",
+    "validation",
+    "evidence",
+    "reviewers"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.2.0"},
+    "manifest_revision": {"type": "integer", "minimum": 1},
+    "manifest_id": {"type": "string", "minLength": 3, "pattern": "^[a-z0-9][a-z0-9._-]+$"},
+    "status": {"enum": ["candidate", "bench-verified", "vehicle-pilot", "supported", "retired"]},
+    "exact_match_required": {"const": true},
+    "independent_vehicle_instances": {"type": "integer", "minimum": 0},
+    "validated_vehicle_instance_ids": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 3}
+    },
+    "vehicle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "make",
+        "model",
+        "generation",
+        "model_year",
+        "market",
+        "plant",
+        "steering_side",
+        "build_date_range",
+        "mcu_family",
+        "autopilot_hardware",
+        "display_part_numbers",
+        "tesla_software_versions"
+      ],
+      "properties": {
+        "make": {"type": "string", "minLength": 1},
+        "model": {"type": "string", "minLength": 1},
+        "generation": {"type": "string", "minLength": 1},
+        "model_year": {"type": "integer", "minimum": 2000, "maximum": 2200},
+        "market": {"type": ["string", "null"]},
+        "plant": {"type": ["string", "null"]},
+        "steering_side": {"enum": ["unknown", "LHD", "RHD"]},
+        "build_date_range": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["start", "end"],
+          "properties": {
+            "start": {"type": ["string", "null"], "format": "date"},
+            "end": {"type": ["string", "null"], "format": "date"}
+          }
+        },
+        "mcu_family": {"type": ["string", "null"]},
+        "autopilot_hardware": {"type": ["string", "null"]},
+        "display_part_numbers": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "tesla_software_versions": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "tesla_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["program_id", "candidate_program_ids", "index_url", "connector_reference_url"],
+      "properties": {
+        "program_id": {"type": ["integer", "null"]},
+        "candidate_program_ids": {"type": "array", "items": {"type": "integer"}},
+        "index_url": {"type": "string", "format": "uri"},
+        "connector_reference_url": {"type": ["string", "null"], "format": "uri"}
+      }
+    },
+    "interfaces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "endpoint",
+          "connector_ref",
+          "applies_to_steering_side",
+          "role",
+          "tesla_part_number",
+          "manufacturer_part_number",
+          "mating_part",
+          "pins",
+          "pinout_status",
+          "confidence",
+          "notes"
+        ],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "endpoint": {"enum": ["display", "mcu", "vehicle-data", "power", "other"]},
+          "connector_ref": {"type": "string", "minLength": 1},
+          "applies_to_steering_side": {"enum": ["LHD", "RHD", "both", "unknown"]},
+          "role": {"type": "string", "minLength": 1},
+          "tesla_part_number": {"type": ["string", "null"]},
+          "manufacturer_part_number": {"type": ["string", "null"]},
+          "mating_part": {"type": ["string", "null"]},
+          "pins": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["cavity", "signal", "direction", "confidence"],
+              "properties": {
+                "cavity": {"type": "string", "minLength": 1},
+                "signal": {"type": "string", "minLength": 1},
+                "direction": {"enum": ["input", "output", "bidirectional", "power", "ground", "unknown"]},
+                "confidence": {"enum": ["confirmed-official", "confirmed-measured", "independent-report", "inferred", "unknown"]}
+              }
+            }
+          },
+          "pinout_status": {"enum": ["unknown", "candidate", "reviewed", "bench-verified"]},
+          "confidence": {"enum": ["confirmed-official", "confirmed-measured", "independent-report", "inferred", "unknown"]},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "harnesses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "harness_id",
+          "assembly_part",
+          "from_interface",
+          "to_interface",
+          "length_mm",
+          "impedance_ohms",
+          "shielding",
+          "identity_payload",
+          "status"
+        ],
+        "properties": {
+          "harness_id": {"type": "string", "minLength": 1},
+          "assembly_part": {"type": ["string", "null"]},
+          "from_interface": {"type": "string", "minLength": 1},
+          "to_interface": {"type": "string", "minLength": 1},
+          "length_mm": {"type": ["number", "null"], "minimum": 0},
+          "impedance_ohms": {"type": ["number", "null"], "minimum": 0},
+          "shielding": {"type": ["string", "null"]},
+          "identity_payload": {"type": ["string", "null"]},
+          "status": {"enum": ["unknown", "candidate", "reviewed", "bench-verified"]}
+        }
+      }
+    },
+    "protocol_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "main_transport",
+        "transport_confidence",
+        "native_width_px",
+        "native_height_px",
+        "refresh_hz",
+        "lane_count",
+        "link_rate",
+        "edid_sha256",
+        "displayid_sha256",
+        "dpcd_sha256",
+        "aux_hpd_profile_sha256",
+        "touch_transport",
+        "touch_profile_sha256"
+      ],
+      "properties": {
+        "status": {"enum": ["unknown", "candidate", "bench-verified"]},
+        "main_transport": {"type": ["string", "null"]},
+        "transport_confidence": {"enum": ["confirmed-official", "confirmed-measured", "independent-report", "inferred", "unknown"]},
+        "native_width_px": {"type": ["integer", "null"], "minimum": 1},
+        "native_height_px": {"type": ["integer", "null"], "minimum": 1},
+        "refresh_hz": {"type": ["number", "null"], "minimum": 1},
+        "lane_count": {"type": ["integer", "null"], "minimum": 1},
+        "link_rate": {"type": ["string", "null"]},
+        "edid_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+        "displayid_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+        "dpcd_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+        "aux_hpd_profile_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+        "touch_transport": {"type": ["string", "null"]},
+        "touch_profile_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
+    "power_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "platform_class",
+        "display_rail_net_name",
+        "accessory_nominal_max_v",
+        "measured_awake_min_v",
+        "measured_awake_max_v",
+        "startup_peak_a",
+        "sleep_current_ma",
+        "transient_profile_sha256"
+      ],
+      "properties": {
+        "status": {"enum": ["unknown", "candidate", "bench-verified"]},
+        "platform_class": {"type": ["string", "null"]},
+        "display_rail_net_name": {"type": ["string", "null"]},
+        "accessory_nominal_max_v": {"type": ["number", "null"], "minimum": 0},
+        "measured_awake_min_v": {"type": ["number", "null"], "minimum": 0},
+        "measured_awake_max_v": {"type": ["number", "null"], "minimum": 0},
+        "startup_peak_a": {"type": ["number", "null"], "minimum": 0},
+        "sleep_current_ma": {"type": ["number", "null"], "minimum": 0},
+        "transient_profile_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
+    "can_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "access_connector",
+        "bitrate_bps",
+        "physical_mode",
+        "termination_ohms_added",
+        "signal_profile_sha256",
+        "source_software_version",
+        "notes"
+      ],
+      "properties": {
+        "status": {"enum": ["unknown", "candidate", "bench-verified"]},
+        "access_connector": {"type": ["string", "null"]},
+        "bitrate_bps": {"type": ["integer", "null"], "minimum": 1},
+        "physical_mode": {"const": "receive-only"},
+        "termination_ohms_added": {"const": 0},
+        "signal_profile_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+        "source_software_version": {"type": ["string", "null"]},
+        "notes": {"type": "string"}
+      }
+    },
+    "safe_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "deenergized_source",
+        "fault_source",
+        "required_native_conditions",
+        "park_state_max_age_ms",
+        "native_recovery_timeout_ms"
+      ],
+      "properties": {
+        "deenergized_source": {"const": "factory-native"},
+        "fault_source": {"const": "factory-native"},
+        "required_native_conditions": {
+          "type": "array",
+        "items": {"type": "string", "minLength": 1},
+          "minItems": 1
+        },
+        "park_state_max_age_ms": {"type": ["integer", "null"], "minimum": 1},
+        "native_recovery_timeout_ms": {"type": ["integer", "null"], "minimum": 1}
+      }
+    },
+    "feature_gates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bench_identification",
+        "external_video",
+        "touch_to_local",
+        "can_receive",
+        "vehicle_installation",
+        "moving_mode",
+        "can_transmit"
+      ],
+      "properties": {
+        "bench_identification": {"type": "boolean"},
+        "external_video": {"type": "boolean"},
+        "touch_to_local": {"type": "boolean"},
+        "can_receive": {"type": "boolean"},
+        "vehicle_installation": {"type": "boolean"},
+        "moving_mode": {"const": false},
+        "can_transmit": {"const": false}
+      }
+    },
+    "capture_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["artifact_id", "kind", "sha256", "captured_on", "tesla_software_version", "vehicle_instance_id", "privacy_reviewed"],
+        "properties": {
+          "artifact_id": {"type": "string", "minLength": 1},
+          "kind": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "captured_on": {"type": "string", "format": "date"},
+          "tesla_software_version": {"type": "string", "minLength": 1},
+          "vehicle_instance_id": {"type": ["string", "null"], "minLength": 3},
+          "privacy_reviewed": {"const": true}
+        }
+      }
+    },
+    "validation": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["test_id", "status", "hardware_revision", "software_revision", "evidence_sha256"],
+        "properties": {
+          "test_id": {"type": "string", "minLength": 1},
+          "status": {"enum": ["not-run", "pass", "fail", "blocked"]},
+          "hardware_revision": {"type": ["string", "null"]},
+          "software_revision": {"type": ["string", "null"]},
+          "evidence_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"}
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "claim", "source_url", "accessed", "confidence", "artifact_sha256"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "claim": {"type": "string", "minLength": 1},
+          "source_url": {"type": "string", "format": "uri"},
+          "accessed": {"type": "string", "format": "date"},
+          "confidence": {"enum": ["confirmed-official", "confirmed-measured", "independent-report", "inferred", "unknown"]},
+          "artifact_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"}
+        }
+      }
+    },
+    "reviewers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["reviewer", "scope", "reviewed_on"],
+        "properties": {
+          "reviewer": {"type": "string", "minLength": 1},
+          "scope": {"type": "string", "minLength": 1},
+          "reviewed_on": {"type": "string", "format": "date"}
+        }
+      }
+    }
+  }
+}
